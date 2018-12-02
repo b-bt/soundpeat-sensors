@@ -140,6 +140,7 @@ class Application {
 		}
 	}
 
+
 	didReciveUSonicNewDistance(pin, value) {
 		let distance = -1
 		if ((value >= 8) && (value <= 12))
@@ -152,7 +153,7 @@ class Application {
 
 		if (distance > 0) {
 			let currentDate = new Date()
-			let didSendRecently = this.distancesUSonic.find(d => {
+			let didSendRecently = this.distancesUSonic.filter(d => {
 				if (d.distance != distance)
 					return false
 
