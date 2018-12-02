@@ -3,26 +3,31 @@ var usonic = require('mmm-usonic');
 class USonicController {
 
 	constructor(pins) {
-		this.usonics = []
+		this.sonics = []
 
 		usonic.init(function (error) {
+    		if (error) {
+        		console.log(error)
+    		} else {
+        		
 
-			for (let index in pins) {
-				const pin = pins[index]
+        		for (let index in pins) {
+        			const pin = pins[index]
 
-				let sonic = {
-					io: usonic.createSensor(pin.echo, pin.trig, 1000),
-					pin: pin
-				}
+        			let sonic = {
+        				io: usonic.createSensor(pin.echo, pin.trig, 1000),
+        				pin: pin
+        			}
 
-				this.usonics.push(sonic)
-			}
+        			this.sonics.push(sonic);
+        		}
+    		}
 		});
 	}
 
 	observeChanges(callback) {
 
-		this.usonics.forEach(function(sonic) {
+		this.sonics.forEach(function(sonic) {
 			setInterval(function() {
 				callback(sonic, sonic.io())
   			}, 100);
