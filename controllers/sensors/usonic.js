@@ -1,11 +1,11 @@
-var usonic = require('mmm-usonic');
+var mmmUSonic = require('mmm-usonic');
 
 class USonicController {
 
 	constructor(pins) {
 		this.usonics = []
 
-		usonic.init(function (error) {
+		mmmUSonic.init(function (error) {
 
 			for (let index in pins) {
 				const pin = pins[index]
