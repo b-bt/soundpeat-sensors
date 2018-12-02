@@ -19,13 +19,9 @@ class ButtonController {
 
 	observeChanges(callback) {
 
-
 		this.buttons.forEach(function(button) {
-			console.log('button: ', button)
 
 			button.io.watch(function(error, value){ 
-
-				console.log(button.pin, value)
 
 				if (error)
 					console.log(error)
@@ -33,7 +29,6 @@ class ButtonController {
 					callback(button.pin, value)
 			})
 		})
-
 	}
 }
 
