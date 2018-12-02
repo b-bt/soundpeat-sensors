@@ -16,23 +16,13 @@ class ButtonController {
 		}
 	}
 
-	observeChanges(pin, callback) {
-		console.log('observe ' + pin)
-		let button = this.buttons.filter(button => button.pin == pin)[0]
+	observeChanges() {
 
-		if (button == null)
-			return
-
-		console.log('observe ok1')
-		button.io.watch(function (error, value) {
-
-			console.log('observe ok2 ' + value)
-  			if (err) {
-    			console.log(error)
-  			} else {
-  				callback(pin, value)
-  			}
-		});
+		for (let button in buttons) {
+			button.io.watch(function (err, value) { 
+				console.log('mudou valo ' + value)
+			})
+		}
 	}
 }
 

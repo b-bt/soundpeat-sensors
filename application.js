@@ -17,8 +17,7 @@ class Application {
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 
-		for (let buttonPin in BUTTONS_PINS)
-			this.buttonController.observeChanges(buttonPin, this.didReciveNewButtonState)
+		this.buttonController.observeChanges()
 
 		// this.ledController.setValue(LEDS_PINS[0], 1)
 	}
