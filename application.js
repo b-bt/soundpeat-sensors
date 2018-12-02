@@ -151,22 +151,24 @@ class Application {
 
 		if (distance > 0) {
 			console.log(distance)
-			// if (this.lastDistanceUSonicPin != null) {
-			// 	if (this.lastDistanceUSonicPin.distance == distance) {
-			// 		let currentDate = new Date()
-			// 		let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
-			// 		if (secondsDiff < 5)
-			// 			return
-
-			// 		this.broadcastUSonicChangedDistanceEvent(distance)
-			// 	}
-			// } else 
+			 if (this.lastDistanceUSonicPin != null) {
+			 	if (this.lastDistanceUSonicPin.distance == distance) {
+			 		let currentDate = new Date()
+			 		let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
+			 		if ((secondsDiff > 5) && (!this.lastDistanceUSonicPin.wasBroadcasted)) {
+			 			this.lastDistanceUSonicPin.wasBroadcasted = true
+			 			this.broadcastUSonicChangedDistanceEvent(distance)
+			 			return
+			 		}
+			 	}
+			 } else 
 				this.broadcastUSonicChangedDistanceEvent(distance)
 		}
 
 		this.lastDistanceUSonicPin = {
 			distance: distance,
-			date: new Date()
+			date: new Date(),
+			wasBroadcasted: false
 		}
 	}
 }
