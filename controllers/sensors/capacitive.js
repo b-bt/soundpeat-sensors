@@ -9,7 +9,7 @@ class CapacitiveController {
 		for (let index in pins) {
 			const pin = pins[index]
 			const capacitive = {
-				io: new Gpio(pin, 'in', 'rising', { debounceTimeout: 10 }),
+				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
 
