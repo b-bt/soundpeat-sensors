@@ -44,15 +44,15 @@ class Application {
 	}
 
 	didReciveNewButtonState(pin, value) {
-		console.log(pin, value)
+		// console.log(pin, value)
 	}
 
 	didReceiveNewCapacitiveState(pin, value) {
-		console.log(pin, value)
+		// console.log(pin, value)
 	}
 
 	didReciveUSonicNewDistance(pin, value) {
-		console.log(pin, value)
+		// console.log(pin, value)
 	}
 }
 
