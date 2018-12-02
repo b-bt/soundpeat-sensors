@@ -73,12 +73,15 @@ class Application {
 		const buttonIndex = BUTTONS_PINS.indexOf(pin)
 		const ledPinForButton = LEDS_PINS[buttonIndex]
 
-		if (this.activeLedsPins.indexOf(ledPinForButton) == -1) {
+		let index = this.activeLedsPins.indexOf(ledPinForButton)
+		if (index == -1) {
 			this.ledController.setValue(ledPinForButton, 1)
 			this.broadcastButtonActivedEvent(buttonIndex + 1)
+			this.activeLedsPins.push(ledPinForButton)
 		} else {
 			this.ledController.setValue(ledPinForButton, 0)
 			this.broadcastButtonDisabledEvent(buttonIndex + 1)
+			this.activeLedsPins.splice(index, 1)
 		}
 	}
 
