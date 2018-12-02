@@ -118,7 +118,7 @@ class Application {
 	}
 
 	didReciveUSonicNewDistance(pin, value) {
-		// console.log(pin, value)
+		 console.log(pin, value)
 	}
 }
 
