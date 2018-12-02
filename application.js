@@ -19,6 +19,7 @@ class Application {
 	constructor() {
 		this.clientSockets = []
 		this.activeLedsPins = []
+		this.activeCapacitivesPins = []
 
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
@@ -62,6 +63,24 @@ class Application {
 		this.broadcastData(data)
 	}
 
+	broadcastCapacitiveActivedEvent(id) {
+		const data = {
+			event: CAPACITIVE_ACTIVATED_EVENT,
+			id: id
+		}
+
+		this.broadcastData(data)
+	}
+
+	broadcastCapacitiveDisabledEvent(id) {
+		const data = {
+			event: CAPACITIVE_DISABLED_EVENT,
+			id: id
+		}
+
+		this.broadcastData(data)
+	}
+
 	broadcastData(data) {
 		const message = JSON.stringify(data)
 		this.clientSockets.forEach(function(cs) {
@@ -73,8 +92,8 @@ class Application {
 		const buttonIndex = BUTTONS_PINS.indexOf(pin)
 		const ledPinForButton = LEDS_PINS[buttonIndex]
 
-		let index = this.activeLedsPins.indexOf(ledPinForButton)
-		
+		const index = this.activeLedsPins.indexOf(ledPinForButton)
+
 		if (index == -1) {
 			this.ledController.setValue(ledPinForButton, 1)
 			this.broadcastButtonActivedEvent(buttonIndex + 1)
@@ -87,7 +106,15 @@ class Application {
 	}
 
 	didReceiveNewCapacitiveState(pin, value) {
-		// console.log(pin, value)
+		const index = this.activeCapacitivesPins.indexOf(activeCapacitivesPins)
+
+		if (index == -1) {
+			this.broadcastCapacitiveActivedEvent(index + 1)
+			this.activeCapacitivesPins.push(activeCapacitivesPins)
+		} else {
+			this.broadcastCapacitiveDisabledEvent(index + 1)
+			this.activeCapacitivesPins.splice(index, 1)
+		}
 	}
 
 	didReciveUSonicNewDistance(pin, value) {
