@@ -18,7 +18,7 @@ class ButtonController {
 
 	observeChanges() {
 
-		for (let button in buttons) {
+		for (let button in this.buttons) {
 			button.io.watch(function (err, value) { 
 				console.log('mudou valo ' + value)
 			})
