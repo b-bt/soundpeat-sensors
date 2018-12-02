@@ -12,6 +12,10 @@ class ButtonController {
 				pin: pin
 			}
 
+			button.io.watch(function(error, value){ 
+				console.log(value)
+			})
+
 			this.buttons.push(button)
 		}
 	}
@@ -19,19 +23,19 @@ class ButtonController {
 	observeChanges(callback) {
 
 
-		this.buttons.forEach(function(button) {
-			console.log('button: ', button)
-			
-			// button.io.watch(function(error, value){ 
+		// this.buttons.forEach(function(button) {
+		// 	console.log('button: ', button)
 
-			// 	console.log(button.pin, value)
+		// 	button.io.watch(function(error, value){ 
 
-			// 	if (error)
-			// 		console.log(error)
-			// 	else
-			// 		callback(button.pin, value)
-			// })
-		})
+		// 		console.log(button.pin, value)
+
+		// 		if (error)
+		// 			console.log(error)
+		// 		else
+		// 			callback(button.pin, value)
+		// 	})
+		// })
 
 	}
 }
