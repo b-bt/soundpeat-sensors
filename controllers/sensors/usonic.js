@@ -28,7 +28,9 @@ class USonicController {
 
 		this.sonics.forEach(function(sonic) {
 			setInterval(function() {
-				callback(sonic, sonic.io())
+				let distance = sonic.io()
+				console.log(sonic, distance)
+				callback(sonic, distance)
   			}, 100);
 		})
 	}
