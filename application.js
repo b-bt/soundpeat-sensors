@@ -38,7 +38,9 @@ class Application {
 	}
 
 	handleDisconnection(wsc) {
-		// this.clientSockets
+		console.log(this.clientSockets.length, wsc.uuid)
+		this.clientSockets = this.clientSockets.filter(client => client.uuid != wsc.uuid)
+		console.log(this.clientSockets.length)
 	}
 
 	didReciveNewButtonState(pin, value) {
