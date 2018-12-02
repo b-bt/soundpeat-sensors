@@ -74,6 +74,7 @@ class Application {
 		const ledPinForButton = LEDS_PINS[buttonIndex]
 
 		let index = this.activeLedsPins.indexOf(ledPinForButton)
+		
 		if (index == -1) {
 			this.ledController.setValue(ledPinForButton, 1)
 			this.broadcastButtonActivedEvent(buttonIndex + 1)
