@@ -24,7 +24,7 @@ class Application {
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
 
-		this.buttonController.observeChanges(this.didReciveNewButtonState)
+		this.buttonController.observeChanges(this.didReciveNewButtonState.bind(this))
 		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState.bind(this))
 
 		this.uSonicController = new USonicController(USONIC_PINS, function() {
