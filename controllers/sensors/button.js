@@ -6,15 +6,12 @@ class ButtonController {
 	constructor(pins) {
 		this.buttons = []
 
-		for (let pin in pins) {
+		for (let index in pins) {
+			const pin = pins[index]
 			let button = {
 				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
-
-			button.io.watch(function(error, value){ 
-				console.log(value)
-			})
 
 			this.buttons.push(button)
 		}
@@ -23,19 +20,19 @@ class ButtonController {
 	observeChanges(callback) {
 
 
-		// this.buttons.forEach(function(button) {
-		// 	console.log('button: ', button)
+		this.buttons.forEach(function(button) {
+			console.log('button: ', button)
 
-		// 	button.io.watch(function(error, value){ 
+			button.io.watch(function(error, value){ 
 
-		// 		console.log(button.pin, value)
+				console.log(button.pin, value)
 
-		// 		if (error)
-		// 			console.log(error)
-		// 		else
-		// 			callback(button.pin, value)
-		// 	})
-		// })
+				if (error)
+					console.log(error)
+				else
+					callback(button.pin, value)
+			})
+		})
 
 	}
 }
