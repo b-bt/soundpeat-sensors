@@ -1,11 +1,10 @@
 var JohnnyFive = require("johnny-five");
 var Raspi = require("raspi-io");
 
-var ButtonController = require('./controllers/sensors/buttons')
-var CapacitiveController = require('./controllers/sensors/capacitive')
+// var ButtonController = require('./controllers/sensors/button')
+// var CapacitiveController = require('./controllers/sensors/capacitive')
 var LedController = require('./controllers/led')
-var USonicController = require('./controllers/usonic')
-
+// var USonicController = require('./controllers/usonic')
 
 const LEDS_PINS = [2, 3, 4]
 
