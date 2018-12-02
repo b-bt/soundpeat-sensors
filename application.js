@@ -18,6 +18,7 @@ class Application {
 
 	constructor() {
 		this.clientSockets = []
+		this.activeLedsPins = []
 
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
@@ -34,17 +35,44 @@ class Application {
 	handleNewConnection(wsc) {
 		this.clientSockets.push(wsc)
 
-		console.log(this.clientSockets)
+		console.log('New WebSocket client connected')
 	}
 
 	handleDisconnection(wsc) {
-		console.log(this.clientSockets.length, wsc.uuid)
 		this.clientSockets = this.clientSockets.filter(client => client.uuid != wsc.uuid)
-		console.log(this.clientSockets.length)
+
+		console.log('One WebSocket client was disconnected')
+	}
+
+	broadcastButtonActivedEvent(id) {
+		this.clientSockets.forEach(function(cs) {
+			cs.send({
+				event: BUTTON_ACTIVATED_EVENT,
+				id: id
+			})
+		})
+	}
+
+	broadcastButtonDisabledEvent(id) {
+		this.clientSockets.forEach(function(cs) {
+			cs.send({
+				event: BUTTON_DISABLED_EVENT,
+				id: id
+			})
+		})
 	}
 
 	didReciveNewButtonState(pin, value) {
-		// console.log(pin, value)
+		let buttonIndex = BUTTONS_PINS.indexOf(pin)
+		let ledPinForButton = LEDS_PINS[buttonIndex]
+
+		if (this.activeLedsPins.indexOf(ledPinForButton) == -1) {
+			this.ledController.setValue(ledPinForButton, 1)
+			this.broadcastButtonActivedEvent(buttonIndex + 1)
+		} else {
+			this.ledController.setValue(ledPinForButton, 0)
+			this.broadcastButtonDisabledEvent(buttonIndex + 1)
+		}
 	}
 
 	didReceiveNewCapacitiveState(pin, value) {
