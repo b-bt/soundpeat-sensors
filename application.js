@@ -24,6 +24,8 @@ class Application {
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
 
+		this.ledController.setValue(4, 1)
+
 		this.buttonController.observeChanges(this.didReciveNewButtonState.bind(this))
 		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState.bind(this))
 
