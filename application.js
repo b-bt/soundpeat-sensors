@@ -149,17 +149,18 @@ class Application {
 		else if ((value >= 28) && (value <= 32))
 			distance = 3
 
-		if (this.lastDistanceUSonicPin != null) {
-			if (this.lastDistanceUSonicPin.distance == distance) {
-				let currentDate = new Date()
-				let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
-				if (secondsDiff < 5)
-					return
+		if (distance > 0) {
+			if (this.lastDistanceUSonicPin != null) {
+				if (this.lastDistanceUSonicPin.distance == distance) {
+					let currentDate = new Date()
+					let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
+					if (secondsDiff < 5)
+						return
 
+					this.broadcastUSonicChangedDistanceEvent(distance)
+				}
+			} else 
 				this.broadcastUSonicChangedDistanceEvent(distance)
-			}
-		} else if (distance > 0) {
-			this.broadcastUSonicChangedDistanceEvent(distance)
 		}
 
 		this.lastDistanceUSonicPin = {
