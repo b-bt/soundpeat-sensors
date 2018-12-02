@@ -20,7 +20,7 @@ class Application {
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
 
 		this.buttonController.observeChanges(this.didReciveNewButtonState)
-		this.observeChanges.observeChanges(this.didReceiveNewCapacitiveState)
+		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState)
 
 		// this.ledController.setValue(LEDS_PINS[0], 1)
 	}
