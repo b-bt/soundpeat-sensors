@@ -22,13 +22,12 @@ class ButtonController {
 		if (button == null)
 			return
 
-		pushButton1.watch(function (error, value) {
+		button.io.watch(function (error, value) {
   			if (err) {
     			console.log(error)
-    			return
+  			} else {
+  				callback(pin, value)
   			}
-
-  			callback(pin, value)
 		});
 	}
 }
