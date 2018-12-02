@@ -81,6 +81,16 @@ class Application {
 		this.broadcastData(data)
 	}
 
+	broadcastUSonicChangedDistanceEvent(id, distance) {
+		const data = {
+			event: USONIC_CHANGE_EVENT,
+			id: id,
+			distance: distance
+		}
+
+		this.broadcastData(data)
+	}
+
 	broadcastData(data) {
 		const message = JSON.stringify(data)
 		this.clientSockets.forEach(function(cs) {
@@ -118,7 +128,16 @@ class Application {
 	}
 
 	didReciveUSonicNewDistance(pin, value) {
-		 console.log(pin, value)
+		let distance = -1
+		if ((value >= 6) && (value <= 14))
+			distance = 1
+		else if ((value >= 16) && (value <= 24))
+			distance = 2
+		else if ((value >= 26) && (value <= 34))
+			distance = 3
+
+		if (distance > 0)
+			this.broadcastUSonicChangedDistanceEvent(pin, distance)
 	}
 }
 
