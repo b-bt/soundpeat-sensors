@@ -20,6 +20,7 @@ class Application {
 		this.clientSockets = []
 		this.activeLedsPins = []
 		this.activeCapacitivesPins = []
+		this.lastDistanceUSonicPin = -1
 
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
@@ -81,10 +82,9 @@ class Application {
 		this.broadcastData(data)
 	}
 
-	broadcastUSonicChangedDistanceEvent(id, distance) {
+	broadcastUSonicChangedDistanceEvent(distance) {
 		const data = {
 			event: USONIC_CHANGE_EVENT,
-			id: id,
 			distance: distance
 		}
 
@@ -136,8 +136,10 @@ class Application {
 		else if ((value >= 26) && (value <= 34))
 			distance = 3
 
-		if (distance > 0)
-			this.broadcastUSonicChangedDistanceEvent(pin, distance)
+		if ((distance > 0) && (distance != this.lastDistanceUSonicPin))
+			this.broadcastUSonicChangedDistanceEvent(distance)
+
+		this.lastDistanceUSonicPin = distance
 	}
 }
 
