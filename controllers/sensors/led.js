@@ -8,7 +8,7 @@ class LedController {
 
 		for (let pin in pins) {
 			let led = {
-				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
+				io: new Gpio(pin, 'out'),
 				pin: pin
 			}
 
@@ -22,7 +22,7 @@ class LedController {
 		let led = this.leds.filter(led => led.pin == pin)[0]
 
 		console.log(led.pin)
-		
+
 		if (led == null)
 			return
 
