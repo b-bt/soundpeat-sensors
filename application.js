@@ -21,7 +21,7 @@ class Application {
 		this.clientSockets = []
 		this.activeLedsPins = []
 		this.activeCapacitivesPins = []
-		this.lastDistanceUSonicPin = -1
+		this.lastDistanceUSonicPin = null
 
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
@@ -149,10 +149,23 @@ class Application {
 		else if ((value >= 28) && (value <= 32))
 			distance = 3
 
-		if ((distance > 0) && (distance != this.lastDistanceUSonicPin))
-			this.broadcastUSonicChangedDistanceEvent(distance)
+		if (this.lastDistanceUSonicPin != null) {
+			if (this.lastDistanceUSonicPin.distance == distance) {
+				let currentDate = new Date()
+				let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
+				if (secondsDiff < 5)
+					return
 
-		this.lastDistanceUSonicPin = distance
+				this.broadcastUSonicChangedDistanceEvent(distance)
+			}
+		} else if (distance > 0) {
+			this.broadcastUSonicChangedDistanceEvent(distance)
+		}
+
+		this.lastDistanceUSonicPin = {
+			distance: distance,
+			date: new Date()
+		}
 	}
 }
 
