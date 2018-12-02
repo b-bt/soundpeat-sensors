@@ -149,25 +149,29 @@ class Application {
 		else if ((value >= 28) && (value <= 32))
 			distance = 3
 
+
 		if (distance > 0) {
-			console.log(distance)
-			 if (this.lastDistanceUSonicPin != null) {
-			 	if (this.lastDistanceUSonicPin.distance == distance) {
-			 		let currentDate = new Date()
-			 		let secondsDiff = Math.abs((currentDate.getTime() - this.lastDistanceUSonicPin.date.getTime())/1000)
-			 		if ((secondsDiff > 5) && (!this.lastDistanceUSonicPin.wasBroadcasted)) {
-			 			this.lastDistanceUSonicPin.wasBroadcasted = true
-			 			this.broadcastUSonicChangedDistanceEvent(distance)
-			 			return
-			 		}
-			 	}
-			 } else 
-				this.broadcastUSonicChangedDistanceEvent(distance)
+
+
+		}
+		if (distance > 0) {
+			if (this.lastDistanceUSonicPin != null) {
+				if (this.lastDistanceUSonicPin.distance == distance) {
+					if (this.lastDistanceUSonicPin.wasBroadcasted == false) {
+						this.lastDistanceUSonicPin.wasBroadcasted = true
+						this.broadcastUSonicChangedDistanceEvent(distance)
+					}
+				} else {
+					this.lastDistanceUSonicPin = {
+						distance: distance,
+						wasBroadcasted: false
+					}
+				}
+			}
 		}
 
 		this.lastDistanceUSonicPin = {
 			distance: distance,
-			date: new Date(),
 			wasBroadcasted: false
 		}
 	}
