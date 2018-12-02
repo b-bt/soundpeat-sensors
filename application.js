@@ -17,7 +17,7 @@ class Application {
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 
-		this.buttonController.observeChanges()
+		this.buttonController.observeChanges(this.didReciveNewButtonState)
 
 		// this.ledController.setValue(LEDS_PINS[0], 1)
 	}
