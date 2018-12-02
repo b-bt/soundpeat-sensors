@@ -5,13 +5,13 @@ class LedController {
 	constructor(pins) {
 		this.leds = []
 
-		for (pin in pins) {
+		for (var pin in pins) {
 			console.log(pin)
 			var led = new JohnnyFive.Led(pin)
 			this.leds.push(led)
 		}
 
-		for (led in this.leds) {
+		for (var led in this.leds) {
 			led.blink()
 		}
 	}
