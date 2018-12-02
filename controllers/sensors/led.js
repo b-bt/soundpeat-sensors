@@ -6,7 +6,8 @@ class LedController {
 	constructor(pins) {
 		this.leds = []
 
-		for (let pin in pins) {
+		for (let index in pins) {
+			const pin = pins[index]
 			let led = {
 				io: new Gpio(pin, 'out'),
 				pin: pin
@@ -17,9 +18,7 @@ class LedController {
 	}
 
 	setValue(pin, value) {
-		console.log(this.leds)
 		let led = this.leds.filter(led => led.pin == pin)[0]
-		console.log(led)
 
 		if (led == null)
 			return
