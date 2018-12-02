@@ -106,7 +106,7 @@ class Application {
 	}
 
 	didReceiveNewCapacitiveState(pin, value) {
-		const index = this.activeCapacitivesPins.indexOf(activeCapacitivesPins)
+		const index = this.activeCapacitivesPins.indexOf(pin)
 
 		if (index == -1) {
 			this.broadcastCapacitiveActivedEvent(index + 1)
