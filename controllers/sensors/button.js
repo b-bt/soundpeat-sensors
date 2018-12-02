@@ -8,7 +8,7 @@ class ButtonController {
 
 		for (let index in pins) {
 			const pin = pins[index]
-			let button = {
+			const button = {
 				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
@@ -17,7 +17,7 @@ class ButtonController {
 		}
 	}
 
-	observeChanges(callback, that) {
+	observeChanges(callback) {
 
 		this.buttons.forEach(function(button) {
 
@@ -26,7 +26,7 @@ class ButtonController {
 				if (error)
 					console.log(error)
 				else
-					callback(button.pin, value, that)
+					callback(button.pin, value)
 			})
 		})
 	}

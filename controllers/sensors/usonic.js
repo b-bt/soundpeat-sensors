@@ -13,7 +13,7 @@ class USonicController {
         		for (let index in pins) {
         			const pin = pins[index]
 
-        			let sonic = {
+        			const sonic = {
         				io: usonic.createSensor(pin.echo, pin.trig, 1000),
         				pin: pin
         			}
@@ -26,11 +26,11 @@ class USonicController {
 		}.bind(this));
 	}
 
-	observeChanges(callback, that) {
+	observeChanges(callback) {
 		this.sonics.forEach(function(sonic) {
 			setInterval(function() {
 				let distance = sonic.io()
-				callback(sonic.pin, distance, that)
+				callback(sonic.pin, distance)
   			}, 100);
 		})
 	}

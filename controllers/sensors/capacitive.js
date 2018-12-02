@@ -8,7 +8,7 @@ class CapacitiveController {
 
 		for (let index in pins) {
 			const pin = pins[index]
-			let capacitive = {
+			const capacitive = {
 				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
@@ -17,7 +17,7 @@ class CapacitiveController {
 		}
 	}
 
-	observeChanges(callback, that) {
+	observeChanges(callback) {
 
 		this.capacitives.forEach(function(capacitive) {
 
@@ -26,7 +26,7 @@ class CapacitiveController {
 				if (error)
 					console.log(error)
 				else
-					callback(capacitive.pin, value, that)
+					callback(capacitive.pin, value)
 			})
 		})
 	}
