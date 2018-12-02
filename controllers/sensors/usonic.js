@@ -25,9 +25,14 @@ class USonicController {
 	}
 
 	observeChanges(callback) {
+		console.log('oi1')
 
 		this.sonics.forEach(function(sonic) {
+
+		console.log('oi2')
 			setInterval(function() {
+
+				console.log('oi3')
 				let distance = sonic.io()
 				console.log(sonic, distance)
 				callback(sonic, distance)
