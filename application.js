@@ -22,7 +22,7 @@ class Application {
 
 		this.uSonicController = new USonicController(USONIC_PINS, function() {
 			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance)
-		})
+		}.bind(this))
 	}
 
 	handleNewConnection(wsc) {
