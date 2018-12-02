@@ -55,7 +55,7 @@ class Application {
   			this.ledController.reset()
   			this.activeLedsPins = []
   			this.activeCapacitivesPins = []
-			this.lastDistanceUSonicPin = -1
+			this.distancesUSonic = []
   		}
 	}
 
@@ -140,7 +140,6 @@ class Application {
 		}
 	}
 
-
 	didReciveUSonicNewDistance(pin, value) {
 		let distance = -1
 		if ((value >= 8) && (value <= 12))
@@ -150,7 +149,6 @@ class Application {
 		else if ((value >= 28) && (value <= 32))
 			distance = 3
 
-
 		if (distance > 0) {
 			let currentDate = new Date()
 			let didSendRecently = this.distancesUSonic.filter(d => {
@@ -158,7 +156,7 @@ class Application {
 					return false
 
 				let secondsDiff = Math.abs((currentDate.getTime() - d.date.getTime())/1000)
-				if (secondsDiff > 2)
+				if (secondsDiff > 3)
 					return false
 
 				return true
