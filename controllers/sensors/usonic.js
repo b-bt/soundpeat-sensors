@@ -10,7 +10,6 @@ class USonicController {
         		console.log(error)
     		} else {
         		
-
         		for (let index in pins) {
         			const pin = pins[index]
 
@@ -22,7 +21,7 @@ class USonicController {
         			this.sonics.push(sonic);
         		}
     		}
-		});
+		}.bind(this));
 	}
 
 	observeChanges(callback) {
