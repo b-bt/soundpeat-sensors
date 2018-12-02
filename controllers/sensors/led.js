@@ -17,7 +17,7 @@ class LedController {
 	}
 
 	setValue(pin, value) {
-		console.log(leds)
+		console.log(this.leds)
 		let led = this.leds.filter(led => led.pin == pin)[0]
 		console.log(led)
 
