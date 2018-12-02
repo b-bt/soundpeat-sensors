@@ -30,7 +30,7 @@ class LedController {
 	}
 
 	reset() {
-		for (let index in self.leds) {
+		for (let index in this.leds) {
 			let led = this.leds[index]
 			led.io.write(0, function(error) {
 				if (error)
