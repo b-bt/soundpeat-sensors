@@ -1,20 +1,36 @@
-var JohnnyFive = require("johnny-five");
+// var onoff = require('onoff');
+// var Gpio = onoff.Gpio
+var five = require("johnny-five");
 
 class LedController {
 
 	constructor(pins) {
 		this.leds = []
 
-		for (var pin in pins) {
-			console.log(pin)
-			var led = new JohnnyFive.Led(pin)
-			this.leds.push(led)
-		}
+		for (let pin in pins) {
 
-		for (var led in this.leds) {
-			led.blink()
+			var led = new five.Led(pin);
+			led.pulse();
+
+			// let led = {
+			// 	io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
+			// 	pin: pin
+			// }
+			// this.leds.push(led)
 		}
 	}
+
+	// setValue(pin, value) {
+	// 	let led = this.leds.filter(led => led.pin == pin)[0]
+
+	// 	if (led == null)
+	// 		return
+
+	// 	led.io.write(value, function(error) {
+	// 		if (error)
+	// 			console.log(error)
+	// 	})
+	// }
 }
 
 module.exports = LedController
