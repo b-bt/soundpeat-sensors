@@ -11,7 +11,7 @@ class USonicController {
 				const pin = pins[index]
 
 				let usonic = {
-					io: usonic.createSensor(pin.echo, pin.trig, 1000);,
+					io: usonic.createSensor(pin.echo, pin.trig, 1000),
 					pin: pin
 				}
 
