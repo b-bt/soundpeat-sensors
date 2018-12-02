@@ -20,16 +20,17 @@ class ButtonController {
 
 
 		this.buttons.forEach(function(button) {
+			console.log('button: ', button)
+			
+			// button.io.watch(function(error, value){ 
 
-			button.io.watch(function(error, value){ 
+			// 	console.log(button.pin, value)
 
-				console.log(button.pin, value)
-
-				if (error)
-					console.log(error)
-				else
-					callback(button.pin, value)
-			})
+			// 	if (error)
+			// 		console.log(error)
+			// 	else
+			// 		callback(button.pin, value)
+			// })
 		})
 
 	}
