@@ -1,4 +1,4 @@
-var onoff = require('onoff');
+var onoff = require('onoff')
 var Gpio = onoff.Gpio
 
 class ButtonController {
@@ -8,7 +8,7 @@ class ButtonController {
 
 		for (let pin in pins) {
 			let button = {
-				io: new Gpio(pin, 'in', 'both', {debounceTimeout: 10}),
+				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
 
@@ -18,7 +18,9 @@ class ButtonController {
 
 	observeChanges() {
 
-		for (let button in this.buttons) {
+		console.log(this.buttons.length)
+
+		for (var button in this.buttons) {
 			button.io.watch(function (err, value) { 
 				console.log('mudou valo ' + value)
 			})
