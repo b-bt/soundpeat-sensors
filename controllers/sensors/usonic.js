@@ -2,7 +2,7 @@ var usonic = require('mmm-usonic');
 
 class USonicController {
 
-	constructor(pins) {
+	constructor(pins, didInitWithSuccess) {
 		this.sonics = []
 
 		usonic.init(function (error) {
@@ -20,19 +20,15 @@ class USonicController {
 
         			this.sonics.push(sonic);
         		}
+
+        		didInitWithSuccess()
     		}
 		}.bind(this));
 	}
 
 	observeChanges(callback) {
-		console.log('oi1')
-
 		this.sonics.forEach(function(sonic) {
-
-		console.log('oi2')
 			setInterval(function() {
-
-				console.log('oi3')
 				let distance = sonic.io()
 				console.log(sonic, distance)
 				callback(sonic, distance)

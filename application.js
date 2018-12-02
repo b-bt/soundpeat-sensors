@@ -16,11 +16,13 @@ class Application {
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
-		this.uSonicController = new USonicController(USONIC_PINS)
 
 		this.buttonController.observeChanges(this.didReciveNewButtonState)
 		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState)
-		this.uSonicController.observeChanges(this.didReciveUSonicNewDistance)
+
+		this.uSonicController = new USonicController(USONIC_PINS, function() {
+			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance)
+		})
 	}
 
 	handleNewConnection(wsc) {
