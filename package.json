@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tbbruno/soundpeat-sensors#readme",
   "dependencies": {
-    "johnny-five": "^1.0.0",
+    "onoff": "^3.2.2",
     "ws": "^6.1.2"
   }
 }
