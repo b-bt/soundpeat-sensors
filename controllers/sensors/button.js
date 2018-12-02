@@ -18,12 +18,13 @@ class ButtonController {
 
 	observeChanges(callback) {
 
-		console.log(this.buttons.length)
 
-		this.buttons.forEach(button => {
+		this.buttons.forEach(function(button) {
 
-			button.io.watch((error, value) => { 
+			button.io.watch(function(error, value){ 
+
 				console.log(button.pin, value)
+
 				if (error)
 					console.log(error)
 				else
