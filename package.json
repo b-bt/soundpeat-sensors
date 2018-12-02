@@ -1,0 +1,24 @@
+{
+  "name": "soundpeat-sensors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbbruno/soundpeat-sensors.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbbruno/soundpeat-sensors/issues"
+  },
+  "homepage": "https://github.com/tbbruno/soundpeat-sensors#readme",
+  "dependencies": {
+    "johnny-five": "^1.0.0",
+    "ws": "^6.1.2",
+    "raspi-io": ˆ"9.0.0"
+  }
+}
