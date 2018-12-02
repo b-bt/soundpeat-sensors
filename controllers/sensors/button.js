@@ -17,7 +17,7 @@ class ButtonController {
 		}
 	}
 
-	observeChanges(callback) {
+	observeChanges(callback, that) {
 
 		this.buttons.forEach(function(button) {
 
@@ -26,7 +26,7 @@ class ButtonController {
 				if (error)
 					console.log(error)
 				else
-					callback(button.pin, value)
+					callback(button.pin, value, that)
 			})
 		})
 	}

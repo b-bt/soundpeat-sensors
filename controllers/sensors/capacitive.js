@@ -17,7 +17,7 @@ class CapacitiveController {
 		}
 	}
 
-	observeChanges(callback) {
+	observeChanges(callback, that) {
 
 		this.capacitives.forEach(function(capacitive) {
 
@@ -26,7 +26,7 @@ class CapacitiveController {
 				if (error)
 					console.log(error)
 				else
-					callback(capacitive.pin, value)
+					callback(capacitive.pin, value, that)
 			})
 		})
 	}

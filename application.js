@@ -24,11 +24,11 @@ class Application {
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
 
-		this.buttonController.observeChanges(this.didReciveNewButtonState.bind(this))
-		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState.bind(this))
+		this.buttonController.observeChanges(this.didReciveNewButtonState, this)
+		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState, this)
 
 		this.uSonicController = new USonicController(USONIC_PINS, function() {
-			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance.bind(this))
+			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance, this)
 		}.bind(this))
 	}
 
@@ -62,24 +62,24 @@ class Application {
 		})
 	}
 
-	didReciveNewButtonState(pin, value) {
+	didReciveNewButtonState(pin, value, that) {
 		let buttonIndex = BUTTONS_PINS.indexOf(pin)
 		let ledPinForButton = LEDS_PINS[buttonIndex]
 
-		if (this.activeLedsPins.indexOf(ledPinForButton) == -1) {
-			this.ledController.setValue(ledPinForButton, 1)
-			this.broadcastButtonActivedEvent(buttonIndex + 1)
+		if (that.activeLedsPins.indexOf(ledPinForButton) == -1) {
+			that.ledController.setValue(ledPinForButton, 1)
+			that.broadcastButtonActivedEvent(buttonIndex + 1)
 		} else {
-			this.ledController.setValue(ledPinForButton, 0)
-			this.broadcastButtonDisabledEvent(buttonIndex + 1)
+			that.ledController.setValue(ledPinForButton, 0)
+			that.broadcastButtonDisabledEvent(buttonIndex + 1)
 		}
 	}
 
-	didReceiveNewCapacitiveState(pin, value) {
+	didReceiveNewCapacitiveState(pin, value, that) {
 		// console.log(pin, value)
 	}
 
-	didReciveUSonicNewDistance(pin, value) {
+	didReciveUSonicNewDistance(pin, value, that) {
 		// console.log(pin, value)
 	}
 }

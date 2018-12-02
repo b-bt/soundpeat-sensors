@@ -26,11 +26,11 @@ class USonicController {
 		}.bind(this));
 	}
 
-	observeChanges(callback) {
+	observeChanges(callback, that) {
 		this.sonics.forEach(function(sonic) {
 			setInterval(function() {
 				let distance = sonic.io()
-				callback(sonic.pin, distance)
+				callback(sonic.pin, distance, that)
   			}, 100);
 		})
 	}
