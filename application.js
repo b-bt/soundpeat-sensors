@@ -1,5 +1,3 @@
-
-
 var LedController = require('./controllers/sensors/led')
 var ButtonController = require('./controllers/sensors/button')
 var CapacitiveController = require('./controllers/sensors//capacitive')
@@ -10,9 +8,17 @@ const BUTTONS_PINS = [17, 27, 22]
 const CAPACITIVE_PINS = [16]
 const USONIC_PINS = [{ echo: 21, trig: 20 }]
 
+const BUTTON_ACTIVATED_EVENT = "ButtonSensorWasActivatedEvent"
+const BUTTON_DISABLED_EVENT = "ButtonSensorWasDisabledEvent"
+const CAPACITIVE_ACTIVATED_EVENT = "CapacitiveSensorActivatedEvent"
+const CAPACITIVE_DISABLED_EVENT = "CapacitiveSensorDisabledEvent"
+const USONIC_CHANGE_EVENT = "USonicSensorChangeEvent"
+
 class Application {
 
 	constructor() {
+		this.clientSockets = []
+
 		this.ledController = new LedController(LEDS_PINS)
 		this.buttonController = new ButtonController(BUTTONS_PINS)
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
@@ -26,7 +32,13 @@ class Application {
 	}
 
 	handleNewConnection(wsc) {
+		this.clientSockets.push(wsc)
 
+		console.log(this.clientSockets)
+	}
+
+	handleDisconnection(wsc) {
+		// this.clientSockets
 	}
 
 	didReciveNewButtonState(pin, value) {

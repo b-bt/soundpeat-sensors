@@ -30,8 +30,7 @@ class USonicController {
 		this.sonics.forEach(function(sonic) {
 			setInterval(function() {
 				let distance = sonic.io()
-				console.log(sonic, distance)
-				callback(sonic, distance)
+				callback(sonic.pin, distance)
   			}, 100);
 		})
 	}

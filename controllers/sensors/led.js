@@ -14,14 +14,10 @@ class LedController {
 
 			this.leds.push(led)
 		}
-
-
 	}
 
 	setValue(pin, value) {
 		let led = this.leds.filter(led => led.pin == pin)[0]
-
-		console.log(led.pin)
 
 		if (led == null)
 			return
