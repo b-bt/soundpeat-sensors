@@ -11,6 +11,8 @@ class Application {
 
 	constructor() {
 		this.ledController = new LedController(LEDS_PINS)
+
+		this.ledController.setValue(LEDS_PINS[0], 1)
 	}
 
 	handleNewConnection(wsc) {

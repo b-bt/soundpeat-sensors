@@ -11,14 +11,18 @@ class LedController {
 				io: new Gpio(pin, 'in', 'both', { debounceTimeout: 10 }),
 				pin: pin
 			}
-			
+
 			this.leds.push(led)
 		}
+
+
 	}
 
 	setValue(pin, value) {
 		let led = this.leds.filter(led => led.pin == pin)[0]
 
+		console.log(led.pin)
+		
 		if (led == null)
 			return
 
