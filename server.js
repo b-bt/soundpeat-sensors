@@ -15,8 +15,11 @@ wss.on('connection', function connection(wsc) {
 	app.handleNewConnection(wsc)
 
 	wsc.on('close', function() {
-		console.log('close')
 		app.handleDisconnection(wsc)
+	})
+
+	wsc.on('message', function(message) {
+  		app.hangleMensageIncoming(wsc, message)
 	})
 
 });

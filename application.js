@@ -13,6 +13,7 @@ const BUTTON_DISABLED_EVENT = "ButtonSensorWasDisabledEvent"
 const CAPACITIVE_ACTIVATED_EVENT = "CapacitiveSensorActivatedEvent"
 const CAPACITIVE_DISABLED_EVENT = "CapacitiveSensorDisabledEvent"
 const USONIC_CHANGE_EVENT = "USonicSensorChangeEvent"
+const RESET_EVENT = "ResetEvent"
 
 class Application {
 
@@ -44,6 +45,18 @@ class Application {
 		this.clientSockets = this.clientSockets.filter(client => client.uuid != wsc.uuid)
 
 		console.log('One WebSocket client was disconnected')
+	}
+
+	hangleMensageIncoming(wsc, message) {
+
+  		const data = JSON.parse(message)
+
+  		if (data.event == RESET_EVENT) {
+  			this.ledController.reset()
+  			this.activeLedsPins = []
+  			this.activeCapacitivesPins = []
+			this.lastDistanceUSonicPin = -1
+  		}
 	}
 
 	broadcastButtonActivedEvent(id) {
@@ -129,11 +142,11 @@ class Application {
 
 	didReciveUSonicNewDistance(pin, value) {
 		let distance = -1
-		if ((value >= 6) && (value <= 14))
+		if ((value >= 8) && (value <= 12))
 			distance = 1
-		else if ((value >= 16) && (value <= 24))
+		else if ((value >= 18) && (value <= 22))
 			distance = 2
-		else if ((value >= 26) && (value <= 34))
+		else if ((value >= 28) && (value <= 32))
 			distance = 3
 
 		if ((distance > 0) && (distance != this.lastDistanceUSonicPin))

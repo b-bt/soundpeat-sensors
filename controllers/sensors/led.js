@@ -28,6 +28,16 @@ class LedController {
 				console.log(error)
 		})
 	}
+
+	reset() {
+		for (let index in self.leds) {
+			let led = this.leds[index]
+			led.io.write(0, function(error) {
+				if (error)
+					console.log(error)
+			})
+		}
+	}
 }
 
 module.exports = LedController
