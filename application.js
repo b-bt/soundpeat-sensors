@@ -25,10 +25,10 @@ class Application {
 		this.capativiceController = new CapacitiveController(CAPACITIVE_PINS)
 
 		this.buttonController.observeChanges(this.didReciveNewButtonState)
-		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState)
+		this.capativiceController.observeChanges(this.didReceiveNewCapacitiveState.bind(this))
 
 		this.uSonicController = new USonicController(USONIC_PINS, function() {
-			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance)
+			this.uSonicController.observeChanges(this.didReciveUSonicNewDistance.bind(this))
 		}.bind(this))
 	}
 
