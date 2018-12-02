@@ -110,7 +110,7 @@ class Application {
 
 		if (index == -1) {
 			this.broadcastCapacitiveActivedEvent(index + 1)
-			this.activeCapacitivesPins.push(activeCapacitivesPins)
+			this.activeCapacitivesPins.push(pin)
 		} else {
 			this.broadcastCapacitiveDisabledEvent(index + 1)
 			this.activeCapacitivesPins.splice(index, 1)
