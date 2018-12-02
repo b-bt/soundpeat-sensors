@@ -20,11 +20,13 @@ class ButtonController {
 
 		console.log(this.buttons.length)
 
-		for (var button in this.buttons) {
+		this.buttons.forEach(button => {
+			console.log(button)
 			button.io.watch(function (err, value) { 
 				console.log('mudou valo ' + value)
 			})
-		}
+		})
+
 	}
 }
 
